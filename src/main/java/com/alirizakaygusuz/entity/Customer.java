@@ -23,7 +23,7 @@ public class Customer extends BaseEntity{
 	private String customerName;
 	
     
-    @OneToMany(mappedBy = "customer")  
+    @OneToMany 
 	private Set<Account> accounts;
 	
 	
