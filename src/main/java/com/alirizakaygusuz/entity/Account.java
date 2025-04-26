@@ -19,43 +19,42 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "account")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Account extends BaseEntity {
 
 	@OneToOne
-    private Address address;
-	
-    @Column(name = "first_name", length = 50, nullable = false)
-    private String firstName;
+	private Address address;
 
-    @Column(name = "last_name", length = 50, nullable = false)
-    private String lastName;
+	@Column(name = "first_name", length = 50, nullable = false)
+	private String firstName;
 
-    @Column(name = "identity_number", length = 11, nullable = false, unique = true)
-    private String identityNumber;
+	@Column(name = "last_name", length = 50, nullable = false)
+	private String lastName;
 
-    @Column(name = "birth_date", nullable = false)
-    private LocalDate birthDate;
+	@Column(name = "identity_number", length = 11, nullable = false, unique = true)
+	private String identityNumber;
 
-    @Column(name = "card_no", length = 16, nullable = false, unique = true)
-    private String cardNo;
+	@Column(name = "birth_date", nullable = false)
+	private LocalDate birthDate;
 
-    @Column(name = "amount", precision = 19, scale = 4, nullable = false)
-    private BigDecimal amount;
+	@Column(name = "card_no", length = 16, nullable = false, unique = true)
+	private String cardNo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "currency_type", length = 3, nullable = false)
-    private CurrencyType currencyType;
+	@Column(name = "amount", precision = 19, scale = 4, nullable = false)
+	private BigDecimal amount;
 
-    @Column(name = "bank_name", length = 100)
-    private String bankName;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "currency_type", length = 3, nullable = false)
+	private CurrencyType currencyType;
 
-    @Column(name = "card_limit", precision = 19, scale = 4)
-    private BigDecimal limitOfCard;
-    
-  
+	@Column(name = "bank_name", length = 100)
+	private String bankName;
 
-    
+	@Column(name = "card_limit", precision = 19, scale = 4)
+	private BigDecimal limitOfCard;
+
 }
