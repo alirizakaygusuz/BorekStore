@@ -14,6 +14,7 @@ public enum ErrorType implements BaseEnum{
     ACCESS_DENIED("1003", "Access is denied"),
     USERNAME_OR_PASSWORD_INVALID("1005","The username or password is incorrect"),
     USERNAME_NOT_FOUND("1006","The username is not found"),
+    USERNAME_IS_ALREADY_EXISTS("1007","This username is already exists"),
 
     // Token Related Errors
     GENERAL_TOKEN_EXCEPTION("2000", "An error occurred while processing the token"),

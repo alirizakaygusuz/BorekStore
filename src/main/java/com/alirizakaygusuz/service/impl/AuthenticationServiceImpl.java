@@ -2,7 +2,6 @@ package com.alirizakaygusuz.service.impl;
 
 import java.util.Date;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.alirizakaygusuz.dto.AuthRequest;
 import com.alirizakaygusuz.dto.DtoUser;
 import com.alirizakaygusuz.entity.User;
+import com.alirizakaygusuz.exception.BaseException;
+import com.alirizakaygusuz.exception.ErrorMessage;
+import com.alirizakaygusuz.exception.ErrorType;
 import com.alirizakaygusuz.mapper.UserMapper;
 import com.alirizakaygusuz.repository.UserRepository;
 import com.alirizakaygusuz.service.IAuthenticationService;
@@ -41,10 +43,13 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 	
 	@Override
 	public DtoUser registerUser(AuthRequest authRequest) {
+		if(userRepository.findByUsername(authRequest.getUsername()).isPresent())  {
+		    throw new BaseException(new ErrorMessage(ErrorType.USERNAME_IS_ALREADY_EXISTS, "Username '" + authRequest.getUsername() + "' is already taken."));
+
+		}
+		
 		
 		User savedUser = userRepository.save(createUser(authRequest));
-		
-
 		
 		return userMapper.userToUserDto(savedUser);
 	}
