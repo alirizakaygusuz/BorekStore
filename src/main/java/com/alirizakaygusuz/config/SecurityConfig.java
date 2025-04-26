@@ -1,6 +1,7 @@
 package com.alirizakaygusuz.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,9 +17,11 @@ import com.alirizakaygusuz.jwt.JWTAuthenticationFilter;
 public class SecurityConfig {
 
 	
-	public static final String REGISTER = "/register";
-	public static final String AUTHENTICATE = "/authenticate";
-	public static final String REFRESH_TOKEN = "/refresh-token";
+
+    public static final String REGISTER = "/register";
+    public static final String AUTHENTICATE = "/authenticate";
+    public static final String REFRESH_TOKEN = "/refresh-token";
+
 
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
@@ -26,14 +29,26 @@ public class SecurityConfig {
 	@Autowired
 	private JWTAuthenticationFilter jwtAuthenticationFilter;
 
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
 		return httpSecurity.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(request -> request.requestMatchers(REGISTER, AUTHENTICATE, REFRESH_TOKEN)
-                        .permitAll().anyRequest().authenticated())
+				.securityContext(securityContext-> securityContext
+						.requireExplicitSave(false))
+                .authorizeHttpRequests(authorize -> authorize
+                		.requestMatchers(
+                				REGISTER,
+                				AUTHENTICATE,
+                				REFRESH_TOKEN
+                				
+                				
+                		).permitAll()
+                		.anyRequest().authenticated()
+                        )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 
 	}
 

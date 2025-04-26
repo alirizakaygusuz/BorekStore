@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"com.alirizakaygusuz"})
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.alirizakaygusuz")
 public class BorekStoreApplicationStarter {
 
 	public static void main(String[] args) {
