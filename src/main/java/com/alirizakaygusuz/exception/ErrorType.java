@@ -12,7 +12,9 @@ public enum ErrorType implements BaseEnum{
     RECORD_NOT_FOUND("1001", "Record not found"),
     INVALID_INPUT("1002", "The provided input is invalid"),
     ACCESS_DENIED("1003", "Access is denied"),
-    
+    USERNAME_OR_PASSWORD_INVALID("1005","The username or password is incorrect"),
+    USERNAME_NOT_FOUND("1006","The username is not found"),
+
     // Token Related Errors
     GENERAL_TOKEN_EXCEPTION("2000", "An error occurred while processing the token"),
     INVALID_TOKEN("2001", "The provided token is invalid"),
