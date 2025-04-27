@@ -28,6 +28,9 @@ public class RefreshToken extends BaseEntity {
 	@Column(name = "expired_date",nullable = false)
 	private Date expiredDate;
 	
+	@Column(name = "used", nullable = false)
+    private boolean used = false;
+	
 	@ManyToOne(optional = false)
 	private User user;
 

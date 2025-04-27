@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.security.core.AuthenticationException;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.alirizakaygusuz.dto.AuthRequest;
 import com.alirizakaygusuz.dto.AuthResponse;
 import com.alirizakaygusuz.dto.DtoUser;
+import com.alirizakaygusuz.dto.RefreshTokenRequest;
 import com.alirizakaygusuz.entity.RefreshToken;
 import com.alirizakaygusuz.entity.User;
 import com.alirizakaygusuz.exception.BaseException;
@@ -26,6 +26,8 @@ import com.alirizakaygusuz.mapper.UserMapper;
 import com.alirizakaygusuz.repository.RefreshTokenRepository;
 import com.alirizakaygusuz.repository.UserRepository;
 import com.alirizakaygusuz.service.IAuthenticationService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class AuthenticationServiceImpl implements IAuthenticationService {
@@ -85,6 +87,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 	}
 
 	@Override
+	@Transactional
 	public AuthResponse authenticate(AuthRequest authRequest) {
 		try {
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -93,31 +96,70 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 			authenticationProvider.authenticate(authenticationToken);
 
 			User currentUser = userRepository.findByUsername(authRequest.getUsername())
-				    .orElseThrow(() -> new BaseException(new ErrorMessage(ErrorType.USERNAME_NOT_FOUND,"Username '" + authRequest.getUsername() + "' is not found.")));
+					.orElseThrow(() -> new BaseException(new ErrorMessage(ErrorType.USERNAME_NOT_FOUND,
+							"Username '" + authRequest.getUsername() + "' is not found.")));
+
 			
-			
-			String accessToken = jwtService.generateToken(currentUser);
-			
-			RefreshToken refreshToken = createRefreshToken(currentUser);
-			
-			
+
 			try {
-			    refreshTokenRepository.deleteByUser(currentUser);
+				refreshTokenRepository.deleteByUser(currentUser);
 			} catch (Exception e) {
-			    throw new BaseException(new ErrorMessage(ErrorType.REFRESH_TOKEN_DELETE_FAILED, e.getMessage()));
+				throw new BaseException(new ErrorMessage(ErrorType.REFRESH_TOKEN_DELETE_FAILED, e.getMessage()));
 			}
 			
-			
-			
+			String accessToken = jwtService.generateToken(currentUser);
+
+			RefreshToken refreshToken = createRefreshToken(currentUser);
 			refreshTokenRepository.save(refreshToken);
-			
+
+
+
 			return new AuthResponse(accessToken, refreshToken.getRefreshToken());
-			
-			
+
 		} catch (AuthenticationException e) {
 			throw new BaseException(new ErrorMessage(ErrorType.USERNAME_OR_PASSWORD_INVALID, e.getMessage()));
 		}
+
+	}
+
+	public boolean isValidRefreshToken(Date expiredDate) {
+		return new Date().before(expiredDate);
+	}
+
+	@Override
+	@Transactional
+	public AuthResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+
+		RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(refreshTokenRequest.getRefreshToken())
+				.orElseThrow(() -> new BaseException(
+						new ErrorMessage(ErrorType.REFRESH_TOKEN_IS_NOT_FOUND, "Refresh token  is not found.")));
+
+		if (!isValidRefreshToken(refreshToken.getExpiredDate())) {
+			throw new BaseException(
+					new ErrorMessage(ErrorType.REFRESH_TOKEN_IS_ALREADY_EXPIRED, "Refresh token is already expired"));
+
+		}
 		
+		if (refreshToken.isUsed()) {
+	        throw new BaseException(new ErrorMessage(ErrorType.REFRESH_TOKEN_ALREADY_USED, "Refresh token is already used."));
+	    }
+		
+		refreshToken.setUsed(true);
+		refreshTokenRepository.save(refreshToken);
+		
+		User currentUser = refreshToken.getUser();
+		
+		
+		String newAccessToken = jwtService.generateToken(currentUser);
+
+		
+	    RefreshToken newRefreshToken = createRefreshToken(currentUser);
+	    refreshTokenRepository.save(newRefreshToken);
+
+		
+		
+		
+		return new AuthResponse(newAccessToken, newRefreshToken.getRefreshToken());
 	}
 
 }

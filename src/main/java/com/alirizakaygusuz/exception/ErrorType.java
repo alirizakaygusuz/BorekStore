@@ -24,7 +24,10 @@ public enum ErrorType implements BaseEnum{
     SIGNATURE_INVALID("2004", "The provided token's signature is invalid"),
     MALFORMED_TOKEN("2005", "The token format is malformed"),
     UNSUPPORTED_TOKEN("2006", "The provided token is unsupported"),
-	REFRESH_TOKEN_DELETE_FAILED("2007","Failed to delete reflesh token");
+    REFRESH_TOKEN_DELETE_FAILED("2007","Failed to delete reflesh token"),
+    REFRESH_TOKEN_IS_NOT_FOUND("2008","Refresh token is not found"),
+    REFRESH_TOKEN_IS_ALREADY_EXPIRED("2009","Refresh token is already expired"),
+    REFRESH_TOKEN_ALREADY_USED("2010","Refresh token is already used");
 
     private final String code;
     private final String message;
