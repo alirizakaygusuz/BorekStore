@@ -31,6 +31,7 @@ public class BorekServiceImpl implements IBorekService{
 		Borek borek = borekMapper.dtoBorekIUToBorek(dtoBorekIU);
 		borek.setCreateTime(new Date());
 		
+		
 		return borek;
 		
 	}

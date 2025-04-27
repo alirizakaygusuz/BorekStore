@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,15 +26,19 @@ import lombok.Setter;
 public class Borek extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private BorekType borekType;
 
     @Column(name = "price")
+    @NotNull
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private final CurrencyType currencyType = CurrencyType.AUD; 
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private BorekStatus borekStatus;
 
 }

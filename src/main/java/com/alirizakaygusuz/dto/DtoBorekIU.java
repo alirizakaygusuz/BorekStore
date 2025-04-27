@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import com.alirizakaygusuz.enums.BorekStatus;
 import com.alirizakaygusuz.enums.BorekType;
-import com.alirizakaygusuz.enums.CurrencyType;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -26,8 +25,7 @@ public class DtoBorekIU {
 	@Positive
 	private BigDecimal price;
 
-	@NotNull
-	private final CurrencyType currencyType = CurrencyType.AUD;
+	
 
 	@NotNull
 	private BorekStatus borekStatus;
