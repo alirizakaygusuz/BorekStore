@@ -29,9 +29,12 @@ public enum ErrorType implements BaseEnum{
     REFRESH_TOKEN_IS_ALREADY_EXPIRED("2009","Refresh token is already expired"),
     REFRESH_TOKEN_ALREADY_USED("2010","Refresh token is already used"),
 	
+    
+    //AddressErrors
+    ADDRESS_NOT_FOUND("3000","Address is not found"),
 	
-	//AddressErrors
-   ADDRESS_NOT_FOUND("3000","Address is not found");
+	//Borek Errors
+   BOREK_NOT_FOUND("4000","Borek is not found");
 
 
     private final String code;

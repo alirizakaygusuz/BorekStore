@@ -13,9 +13,8 @@ public interface IAddressService {
 	public List<DtoAddress> getAllAddresses();
 	
 	
-	public void deleteAddress(Long id);
-	
 	public DtoAddress updateAddress(DtoAddressIU dtoAddressIU, Long id);
 	
+	public void deleteAddress(Long id);
 
 }
