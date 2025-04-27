@@ -23,7 +23,8 @@ public enum ErrorType implements BaseEnum{
     UNAUTHORIZED_ACCESS("20023", "Access is denied due to invalid credentials"),
     SIGNATURE_INVALID("2004", "The provided token's signature is invalid"),
     MALFORMED_TOKEN("2005", "The token format is malformed"),
-    UNSUPPORTED_TOKEN("2006", "The provided token is unsupported");
+    UNSUPPORTED_TOKEN("2006", "The provided token is unsupported"),
+	REFRESH_TOKEN_DELETE_FAILED("2007","Failed to delete reflesh token");
 
     private final String code;
     private final String message;

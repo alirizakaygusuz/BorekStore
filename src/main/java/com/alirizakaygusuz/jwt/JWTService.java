@@ -27,12 +27,16 @@ public class JWTService {
 
 	@Value("${jwt.secret.key}")
 	private String SECRET_KEY;
+	
+
+	@Value("${access.token.expiration}")
+	private Long accessTokenExpirationMs;
 
 	public String generateToken(UserDetails userDetails) {
 		return Jwts.builder()
 				.setSubject(userDetails.getUsername())
 				.setIssuedAt(new Date())
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 4))
+				.setExpiration(new Date(System.currentTimeMillis() + accessTokenExpirationMs))
 				.signWith(getKey(), SignatureAlgorithm.HS256)
 				.compact();
 

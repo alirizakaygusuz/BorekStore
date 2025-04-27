@@ -9,6 +9,7 @@ import com.alirizakaygusuz.controller.IRestAuthenticationController;
 import com.alirizakaygusuz.controller.RestBaseController;
 import com.alirizakaygusuz.controller.response.RootEntity;
 import com.alirizakaygusuz.dto.AuthRequest;
+import com.alirizakaygusuz.dto.AuthResponse;
 import com.alirizakaygusuz.dto.DtoUser;
 import com.alirizakaygusuz.service.IAuthenticationService;
 
@@ -22,10 +23,21 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
 	private IAuthenticationService authenticationService;
 	
 	
+		
+	
 	@PostMapping("/register")
 	@Override
 	public RootEntity<DtoUser> register(@Valid @RequestBody AuthRequest authRequest) {
 		return ok(authenticationService.registerUser(authRequest));
+	}
+
+
+	
+	@PostMapping("/authenticate")
+	@Override
+	public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest authRequest) {
+		
+		return ok(authenticationService.authenticate(authRequest));
 	}
 
 }

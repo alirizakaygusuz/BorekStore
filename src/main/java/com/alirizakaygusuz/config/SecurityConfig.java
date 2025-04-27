@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -28,23 +29,29 @@ public class SecurityConfig {
 
 	@Autowired
 	private JWTAuthenticationFilter jwtAuthenticationFilter;
+	
+	
+	@Autowired
+	private AuthenticationEntryPoint authenticationEntryPoint;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
 		return httpSecurity.csrf(csrf -> csrf.disable())
-				.securityContext(securityContext-> securityContext
-						.requireExplicitSave(false))
+                .securityContext(securityContext -> securityContext
+                        .requireExplicitSave(false))
                 .authorizeHttpRequests(authorize -> authorize
-                		.requestMatchers(
-                				REGISTER,
-                				AUTHENTICATE,
-                				REFRESH_TOKEN
-                				
-                				
-                		).permitAll()
-                		.anyRequest().authenticated()
-                        )
+                                .requestMatchers(
+                                        REGISTER,
+                                        AUTHENTICATE,
+                                        REFRESH_TOKEN
+
+
+                                ).permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .exceptionHandling(handling -> handling.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
