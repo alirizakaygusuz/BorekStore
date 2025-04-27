@@ -21,6 +21,8 @@ import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	
+
 
     private final BorekStoreApplicationStarter borekStoreApplicationStarter;
 
