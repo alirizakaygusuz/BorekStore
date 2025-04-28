@@ -12,6 +12,7 @@ import com.alirizakaygusuz.entity.User;
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
 
+	
 	void deleteByUser(User user);
 	
 	Optional<RefreshToken>  findByRefreshToken(String refreshToken);

@@ -15,6 +15,7 @@ public enum ErrorType implements BaseEnum{
     USERNAME_OR_PASSWORD_INVALID("1005","The username or password is incorrect"),
     USERNAME_NOT_FOUND("1006","The username is not found"),
     USERNAME_IS_ALREADY_EXISTS("1007","This username is already exists"),
+    INVALID_BIRTH_DATE("1008", "Invalid birth date. You must be between 13 and 120 years old"),
 
     // Token Related Errors
     GENERAL_TOKEN_EXCEPTION("2000", "An error occurred while processing the token"),
@@ -34,7 +35,11 @@ public enum ErrorType implements BaseEnum{
     ADDRESS_NOT_FOUND("3000","Address is not found"),
 	
 	//Borek Errors
-   BOREK_NOT_FOUND("4000","Borek is not found");
+   BOREK_NOT_FOUND("4000","Borek is not found"),
+	
+	//Account Errors
+	ACCOUNT_NOT_FOUND("5001","Account is not found");
+
 
 
     private final String code;

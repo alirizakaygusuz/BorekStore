@@ -16,6 +16,9 @@ public interface BorekMapper {
 
     DtoBorek borekToDtoBorek(Borek borek);
 
+    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createTime", ignore = true)
     Borek dtoBorekIUToBorek(DtoBorekIU dtoBorekIU);
 
     DtoBorekIU dtoBorekToDtoBorekIU(DtoBorek dtoBorek);

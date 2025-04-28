@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alirizakaygusuz.dto.DtoAddress;
 import com.alirizakaygusuz.dto.DtoAddressIU;
+import com.alirizakaygusuz.entity.Address;
 
 public interface IAddressService {
 	public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
@@ -16,5 +17,7 @@ public interface IAddressService {
 	public DtoAddress updateAddress(DtoAddressIU dtoAddressIU, Long id);
 	
 	public void deleteAddress(Long id);
+
+	public Address findAddressByIdThrow(Long address_id);
 
 }

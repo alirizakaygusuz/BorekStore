@@ -19,10 +19,17 @@ public class ErrorMessage {
 		StringBuilder builder = new StringBuilder();
 		builder.append(errorType.getCode() + " " + errorType.getMessage());
 
-		if (this.additionalInfo != null) {
+		if (this.additionalInfo != null && !this.additionalInfo.isEmpty()) {
 			builder.append(":" + additionalInfo);
 		}
 		return builder.toString();
 	}
+
+	public ErrorMessage(ErrorType errorType) {
+	    this.errorType = errorType;
+	    this.additionalInfo = null;
+	}
+
+	
 
 }

@@ -33,8 +33,8 @@ public class AddressServiceImpl implements IAddressService {
 		return currentAddress;
 	}
 	
-	
-	private Address findAddressByIdThrow(Long id) {
+	@Override
+	public Address findAddressByIdThrow(Long id) {
 		return addressRepository.findById(id).orElseThrow(() -> new BaseException(
 				new ErrorMessage(ErrorType.ADDRESS_NOT_FOUND, "Address not found with id: " + id)));
 	}
