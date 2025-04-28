@@ -69,7 +69,8 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	
-	private Account findAccountByIdThrow(Long id) {
+	@Override
+	public Account findAccountByIdThrow(Long id) {
 		return accountRepository.findById(id).orElseThrow(() -> new BaseException(
 				new ErrorMessage(ErrorType.ACCOUNT_NOT_FOUND, "Account not found with id:" + id)));
 

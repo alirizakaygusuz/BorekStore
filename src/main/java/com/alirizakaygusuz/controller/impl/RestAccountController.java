@@ -66,7 +66,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 	@Override
 	public RootEntity<String> deletAccount(@PathVariable Long id) {
 		accountService.deleteAccount(id);
-		return ok("Account is deleted succesfully");
+		return ok("Account has been deleted succesfully");
 	}
 
 }

@@ -58,7 +58,7 @@ public class RestBorekController extends RestBaseController implements IRestBore
 	@Override
 	public RootEntity<String> deleteBorek(@Valid  @PathVariable Long id) {
 		borekService.deleteBorek(id);
-		return ok("Borek deleted succesfully");
+		return ok("Borek has been deleted succesfully");
 	}
 	
 	

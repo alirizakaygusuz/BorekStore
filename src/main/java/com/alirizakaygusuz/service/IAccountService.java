@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alirizakaygusuz.dto.DtoAccount;
 import com.alirizakaygusuz.dto.DtoAccountIU;
+import com.alirizakaygusuz.entity.Account;
 
 public interface IAccountService {
 	public DtoAccount saveAccount(DtoAccountIU dtoAccountIU);
@@ -15,5 +16,7 @@ public interface IAccountService {
 	public DtoAccount updateAccount(DtoAccountIU dtoAccountIU , Long id);
 	
 	public void deleteAccount(Long id);
+	
+	public Account findAccountByIdThrow(Long id);
 	
 }
