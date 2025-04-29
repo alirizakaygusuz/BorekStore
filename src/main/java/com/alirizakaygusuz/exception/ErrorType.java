@@ -39,7 +39,11 @@ public enum ErrorType implements BaseEnum {
 	ACCOUNT_ALREADY_ASSIGNED("5002", "Account is already assigned"),
 
 	// Customer Errors
-	CUSTOMER_NOT_FOUND("6000", "Customer is not found");
+	CUSTOMER_NOT_FOUND("6000", "Customer is not found"),
+	
+	
+	STORE_NOT_FOUND("7000", "Address is not found");
+
 
 	private final String code;
 	private final String message;

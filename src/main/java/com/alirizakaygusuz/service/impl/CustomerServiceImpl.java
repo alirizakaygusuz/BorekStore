@@ -21,12 +21,17 @@ import com.alirizakaygusuz.mapper.CustomerMapper;
 import com.alirizakaygusuz.repository.CustomerRepository;
 import com.alirizakaygusuz.service.IAccountService;
 import com.alirizakaygusuz.service.ICustomerService;
+import com.alirizakaygusuz.validator.AccountAssignmentValidator;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private AccountAssignmentValidator accountAssginmentValidator;
+	
 
 	@Autowired
 	private CustomerMapper customerMapper;
@@ -59,36 +64,12 @@ public class CustomerServiceImpl implements ICustomerService {
 		return accounts;
 	}
 
-	private void validateAccountIds(Set<Long> accountIds) {
-		ensureAccountsAreAssignable(accountIds, null, false);
-	}
-
-	private void ensureAccountsAreAssignable(Set<Long> accountIds, Long customerId, boolean isUpdate) {
-		if (accountIds == null || accountIds.isEmpty()) {
-			throw new BaseException(
-					new ErrorMessage(ErrorType.ACCOUNT_ID_IS_MISSING, "Account IDs must not be null or empty."));
-		}
-
-		for (Long id : accountIds) {
-			boolean isAssigned;
-			if (isUpdate) {
-				isAssigned = customerRepository.existsByAccountsIdAndIdNot(id, customerId);
-			} else {
-				isAssigned = customerRepository.existsByAccountsId(id);
-			}
-
-			if (isAssigned) {
-				throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_ALREADY_ASSIGNED, "account id:" + id));
-			}
-
-		}
-
-	}
+	
 
 	@Transactional
 	@Override
 	public DtoCustomer saveCustomer(DtoCustomerIU dtoCustomerIU) {
-		validateAccountIds(dtoCustomerIU.getAccountIds());
+		accountAssginmentValidator.ensureAssignableForCustomer(dtoCustomerIU.getAccountIds());
 
 		Customer customer = createCustomer(dtoCustomerIU);
 
@@ -127,7 +108,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	public DtoCustomer updateCustomer(DtoCustomerIU dtoCustomerIU, Long id) {
 		Customer customer = findCustomerByIdThrow(id);
 
-		ensureAccountsAreAssignable(dtoCustomerIU.getAccountIds(), customer.getId(), true);
+		accountAssginmentValidator.ensureAssignableForCustomer(dtoCustomerIU.getAccountIds(),id);
 
 		customerMapper.updateCustomerFromDtoCustomerIU(dtoCustomerIU, customer);
 
