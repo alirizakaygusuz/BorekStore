@@ -36,7 +36,8 @@ public class BorekServiceImpl implements IBorekService{
 		
 	}
 	
-	private Borek findBorekByIdThrow(Long id) {
+	@Override
+	public Borek findBorekByIdThrow(Long id) {
 		return borekRepository.findById(id)
 				.orElseThrow(() -> new BaseException(
 						new ErrorMessage(ErrorType.BOREK_NOT_FOUND, "Borek not found with id: " + id)));

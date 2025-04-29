@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.alirizakaygusuz.dto.DtoBorek;
 import com.alirizakaygusuz.dto.DtoBorekIU;
+import com.alirizakaygusuz.entity.Borek;
+import com.alirizakaygusuz.entity.Store;
 
 public interface IBorekService {
 	
@@ -18,5 +20,7 @@ public interface IBorekService {
 	
 	
 	public void deleteBorek(Long id);
+	
+	public Borek findBorekByIdThrow(Long id);
 
 }
