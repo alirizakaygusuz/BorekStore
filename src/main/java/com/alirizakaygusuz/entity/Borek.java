@@ -35,7 +35,7 @@ public class Borek extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private final CurrencyType currencyType = CurrencyType.AUD; 
+    private CurrencyType currencyType; 
 
     @Enumerated(EnumType.STRING)
     @NotNull

@@ -32,34 +32,34 @@ public class RestStoreBorekController extends RestBaseController implements IRes
 	@Override
 	public RootEntity<DtoStoreBorek> saveStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU) {
 	
-		return ok(storeBorekService.saveBorek(dtoStoreBorekIU));
+		return ok(storeBorekService.saveStoreBorek(dtoStoreBorekIU));
 	}
 
 	@GetMapping("/list/{id}")
 	@Override
 	public RootEntity<DtoStoreBorek> findStoreBorekById(@PathVariable Long id) {
 		
-		return ok(storeBorekService.findBorekById(id));
+		return ok(storeBorekService.findStoreBorekById(id));
 	}
 
 	@GetMapping("/list")
 	@Override
 	public RootEntity<List<DtoStoreBorek>> getAllStoreBoreks() {
 		
-		return ok(storeBorekService.getAllBoreks());
+		return ok(storeBorekService.getAllStoreBoreks());
 	}
 
 	@PutMapping("/update/{id}")
 	@Override
 	public RootEntity<DtoStoreBorek> updateStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU,@PathVariable Long id) {
 		
-		return ok(storeBorekService.updateBorek(dtoStoreBorekIU, id));
+		return ok(storeBorekService.updateStoreBorek(dtoStoreBorekIU, id));
 	}
 
 	@DeleteMapping("/delete/{id}")
 	@Override
 	public RootEntity<String> deleteStoreBorek(@PathVariable Long id) {
-		storeBorekService.deleteBorek(id);
+		storeBorekService.deleteStoreBorek(id);
 		
 		return ok("StoreBorek has been deleted.");
 		

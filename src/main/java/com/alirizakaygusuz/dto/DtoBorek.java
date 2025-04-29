@@ -24,7 +24,7 @@ public class DtoBorek extends DtoBase {
     private BigDecimal price;
 
     
-    private final CurrencyType currencyType = CurrencyType.AUD; 
+    private CurrencyType currencyType ; 
 
     private BorekStatus borekStatus;
 

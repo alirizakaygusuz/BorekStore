@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.alirizakaygusuz.dto.DtoBorek;
 import com.alirizakaygusuz.dto.DtoBorekIU;
 import com.alirizakaygusuz.entity.Borek;
+import com.alirizakaygusuz.enums.BorekStatus;
+import com.alirizakaygusuz.enums.CurrencyType;
 import com.alirizakaygusuz.exception.BaseException;
 import com.alirizakaygusuz.exception.ErrorMessage;
 import com.alirizakaygusuz.exception.ErrorType;
@@ -30,6 +32,8 @@ public class BorekServiceImpl implements IBorekService{
 	private Borek createBorek(DtoBorekIU dtoBorekIU) {
 		Borek borek = borekMapper.dtoBorekIUToBorek(dtoBorekIU);
 		borek.setCreateTime(new Date());
+		borek.setBorekStatus(BorekStatus.SALABLE);
+		borek.setCurrencyType(CurrencyType.AUD);
 		
 		
 		return borek;

@@ -2,6 +2,7 @@ package com.alirizakaygusuz.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,10 @@ public class StoreBorek extends BaseEntity {
 	@ManyToOne
 	private Store store;
 	
-	@ManyToOne
+	@OneToOne
 	private Borek borek;
+
+	
+
 
 }

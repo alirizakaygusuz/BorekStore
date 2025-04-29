@@ -61,8 +61,8 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 	}
 
 	private void ensureAssignableForStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id) {
-		boolean storeBorekIn = storeBorekRepository.existsByStoreIdAndBorekId(dtoStoreBorekIU.getStoreId(),
-				dtoStoreBorekIU.getBorekId());
+		boolean storeBorekIn = storeBorekRepository.existsByStoreIdAndBorekIdAndIdNot(dtoStoreBorekIU.getStoreId(),
+				dtoStoreBorekIU.getBorekId(),id);
 
 		if (storeBorekIn) {
 			throw new BaseException(new ErrorMessage(ErrorType.STOREBOREK_ALREADY_EXISTS,
@@ -70,10 +70,26 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 		}
 	}
 
+	private void ensureBorekNotAssignedToAnyStore(Long borekId) {
+	    boolean borekAssigned = storeBorekRepository.existsByBorekId(borekId);
+
+	    if (borekAssigned) {
+	        throw new BaseException(new ErrorMessage(ErrorType.STOREBOREK_BOREK_ALREADY_EXISTS,
+	            "borek id:"+borekId));
+	    }
+	}
+	
+	
 	@Transactional
 	@Override
-	public DtoStoreBorek saveBorek(DtoStoreBorekIU dtoStoreBorekIU) {
+	public DtoStoreBorek saveStoreBorek(DtoStoreBorekIU dtoStoreBorekIU) {
+		
+	    ensureBorekNotAssignedToAnyStore(dtoStoreBorekIU.getBorekId());
+	    
+	    
 		ensureAssignableForStoreBorek(dtoStoreBorekIU);
+		
+		
 		StoreBorek savedStoreBorek = storeBorekRepository.save(createStoreBorek(dtoStoreBorekIU));
 		savedStoreBorek.setCreateTime(new Date());
 
@@ -81,13 +97,13 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 	}
 
 	@Override
-	public DtoStoreBorek findBorekById(Long id) {
+	public DtoStoreBorek findStoreBorekById(Long id) {
 		StoreBorek storeBorek = findStoreBorekByIdThrow(id);
 		return storeBorekMapper.storeBorekToDtoStoreBorek(storeBorek);
 	}
 
 	@Override
-	public List<DtoStoreBorek> getAllBoreks() {
+	public List<DtoStoreBorek> getAllStoreBoreks() {
 		List<StoreBorek> storeBorekList = storeBorekRepository.findAll();
 		List<DtoStoreBorek> dtoStoreBorekList = new ArrayList<>();
 
@@ -100,7 +116,9 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 
 	@Transactional
 	@Override
-	public DtoStoreBorek updateBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id) {
+	public DtoStoreBorek updateStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id) {
+	    
+		ensureBorekNotAssignedToAnyStore(dtoStoreBorekIU.getBorekId());
 
 		ensureAssignableForStoreBorek(dtoStoreBorekIU, id);
 
@@ -119,7 +137,7 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 
 	@Transactional
 	@Override
-	public void deleteBorek(Long id) {
+	public void deleteStoreBorek(Long id) {
 		StoreBorek storeBorek = findStoreBorekByIdThrow(id);
 
 		storeBorekRepository.delete(storeBorek);

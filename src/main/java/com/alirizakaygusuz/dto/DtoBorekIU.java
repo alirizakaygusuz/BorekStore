@@ -27,6 +27,4 @@ public class DtoBorekIU {
 
 	
 
-	@NotNull
-	private BorekStatus borekStatus;
 }

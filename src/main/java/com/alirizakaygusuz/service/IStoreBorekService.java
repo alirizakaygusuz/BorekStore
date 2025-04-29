@@ -7,14 +7,14 @@ import com.alirizakaygusuz.dto.DtoStoreBorekIU;
 
 public interface IStoreBorekService {
 
-	public DtoStoreBorek saveBorek(DtoStoreBorekIU dtoStoreBorekIU);
+	public DtoStoreBorek saveStoreBorek(DtoStoreBorekIU dtoStoreBorekIU);
 
-	public DtoStoreBorek findBorekById(Long id);
+	public DtoStoreBorek findStoreBorekById(Long id);
 
-	public List<DtoStoreBorek> getAllBoreks();
+	public List<DtoStoreBorek> getAllStoreBoreks();
 
-	public DtoStoreBorek updateBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id);
+	public DtoStoreBorek updateStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id);
 	
-	public void deleteBorek(Long id);
+	public void deleteStoreBorek(Long id);
 
 }

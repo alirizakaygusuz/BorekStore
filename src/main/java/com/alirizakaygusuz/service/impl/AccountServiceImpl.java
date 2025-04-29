@@ -55,8 +55,34 @@ public class AccountServiceImpl implements IAccountService {
 
 	}
 
+	private void ensureCardNoAndIdentityNumberNotAssignedToAnyAccount(String identityNumber, String cardNo) {
+		if (accountRepository.existsByIdentityNumber(identityNumber)) {
+			throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_IDENTITYNUMBER_ALREADY_EXISTS,
+					"Identity Number: " + identityNumber));
+		}
+
+		if (accountRepository.existsByCardNo(cardNo)) {
+			throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_CARDNO_ALREADY_EXISTS, "Card No: " + cardNo));
+		}
+	}
+
+	private void ensureCardNoAndIdentityNumberNotAssignedToAnyAccount(String identityNumber, String cardNo,
+			Long accountId) {
+		if (accountRepository.existsByIdentityNumberAndIdNot(identityNumber, accountId)) {
+			throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_IDENTITYNUMBER_ALREADY_EXISTS,
+					"Identity Number: " + identityNumber));
+		}
+
+		if (accountRepository.existsByCardNoAndIdNot(cardNo, accountId)) {
+			throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_CARDNO_ALREADY_EXISTS, "Card No: " + cardNo));
+		}
+	}
+
 	@Override
 	public DtoAccount saveAccount(DtoAccountIU dtoAccountIU) {
+		ensureCardNoAndIdentityNumberNotAssignedToAnyAccount(dtoAccountIU.getIdentityNumber(),
+				dtoAccountIU.getCardNo());
+
 		Address address = addressService.findAddressByIdThrow(dtoAccountIU.getAddress_id());
 
 		Account account = createAccount(dtoAccountIU);
@@ -68,7 +94,6 @@ public class AccountServiceImpl implements IAccountService {
 		return accountMapper.accountToDtoAccount(savedAccount);
 	}
 
-	
 	@Override
 	public Account findAccountByIdThrow(Long id) {
 		return accountRepository.findById(id).orElseThrow(() -> new BaseException(
@@ -98,14 +123,16 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public DtoAccount updateAccount(DtoAccountIU dtoAccountIU, Long id) {
+
+		ensureCardNoAndIdentityNumberNotAssignedToAnyAccount(dtoAccountIU.getIdentityNumber(), dtoAccountIU.getCardNo(),id);
 		Account account = findAccountByIdThrow(id);
 
 		accountMapper.updateAccountFromDtoAccountIU(dtoAccountIU, account, addressMapper);
-		
+
 		Address address = addressService.findAddressByIdThrow(dtoAccountIU.getAddress_id());
-		
+
 		account.setAddress(address);
-		
+
 		Account updatedAccount = accountRepository.save(account);
 
 		return accountMapper.accountToDtoAccount(updatedAccount);

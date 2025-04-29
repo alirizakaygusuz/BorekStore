@@ -8,4 +8,11 @@ import com.alirizakaygusuz.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
+	boolean existsByCardNo(String cardNo);
+	
+	boolean existsByCardNoAndIdNot(String cardNo ,  Long id);
+	
+	boolean existsByIdentityNumber(String identityNumber);
+	
+	boolean existsByIdentityNumberAndIdNot(String identityNumber , Long id);
 }

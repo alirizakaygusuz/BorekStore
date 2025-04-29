@@ -40,6 +40,8 @@ public enum ErrorType implements BaseEnum {
 	ACCOUNT_NOT_FOUND("5000", "Account is not found"), 
 	ACCOUNT_ID_IS_MISSING("5001", "Account is not found"),
 	ACCOUNT_ALREADY_ASSIGNED("5002", "Account is already assigned"),
+	ACCOUNT_IDENTITYNUMBER_ALREADY_EXISTS("5003", "Identity number already exists in another account"),
+	ACCOUNT_CARDNO_ALREADY_EXISTS("5004", "Card number already exists in another account"),
 
 	// Customer Errors
 	CUSTOMER_NOT_FOUND("6000", "Customer is not found"),
@@ -47,7 +49,8 @@ public enum ErrorType implements BaseEnum {
 	STORE_NOT_FOUND("7000", "Store is not found"),
 
 	STOREBOREK_NOT_FOUND("8000", "StoreBorek is not found"),
-	STOREBOREK_ALREADY_EXISTS("8000", "StoreBorek is already exists");
+	STOREBOREK_ALREADY_EXISTS("8001", "StoreBorek already exists"),
+	STOREBOREK_BOREK_ALREADY_EXISTS("8002", "Borek already exists in another StoreBorek");
 
 	private final String code;
 	private final String message;

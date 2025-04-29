@@ -15,19 +15,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Store extends BaseEntity{
-	
-	
+public class Store extends BaseEntity {
+
 	@Column(name = "name")
 	private String name;
-	
-	
+
 	@OneToOne
 	private Address address;
-	
-	
+
 	@OneToOne
 	private Account account;
-	
+
+
 
 }
