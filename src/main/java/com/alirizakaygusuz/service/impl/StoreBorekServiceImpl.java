@@ -60,9 +60,9 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 		}
 	}
 
-	private void ensureAssignableForStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id) {
+	private void ensureAssignableForStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long excludedId) {
 		boolean storeBorekIn = storeBorekRepository.existsByStoreIdAndBorekIdAndIdNot(dtoStoreBorekIU.getStoreId(),
-				dtoStoreBorekIU.getBorekId(),id);
+				dtoStoreBorekIU.getBorekId(),excludedId);
 
 		if (storeBorekIn) {
 			throw new BaseException(new ErrorMessage(ErrorType.STOREBOREK_ALREADY_EXISTS,
@@ -72,6 +72,15 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 
 	private void ensureBorekNotAssignedToAnyStore(Long borekId) {
 	    boolean borekAssigned = storeBorekRepository.existsByBorekId(borekId);
+
+	    if (borekAssigned) {
+	        throw new BaseException(new ErrorMessage(ErrorType.STOREBOREK_BOREK_ALREADY_EXISTS,
+	            "borek id:"+borekId));
+	    }
+	}
+	
+	private void ensureBorekNotAssignedToAnyStore(Long borekId ,Long excludedId) {
+	    boolean borekAssigned = storeBorekRepository.existsByBorekIdAndIdNot(borekId , excludedId);
 
 	    if (borekAssigned) {
 	        throw new BaseException(new ErrorMessage(ErrorType.STOREBOREK_BOREK_ALREADY_EXISTS,
@@ -89,9 +98,10 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 	    
 		ensureAssignableForStoreBorek(dtoStoreBorekIU);
 		
-		
-		StoreBorek savedStoreBorek = storeBorekRepository.save(createStoreBorek(dtoStoreBorekIU));
-		savedStoreBorek.setCreateTime(new Date());
+		StoreBorek storeBorek = createStoreBorek(dtoStoreBorekIU);
+		storeBorek.setCreateTime(new Date());
+
+		StoreBorek savedStoreBorek = storeBorekRepository.save(storeBorek);
 
 		return storeBorekMapper.storeBorekToDtoStoreBorek(savedStoreBorek);
 	}
@@ -117,13 +127,15 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 	@Transactional
 	@Override
 	public DtoStoreBorek updateStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id) {
+		
+		StoreBorek storeBorek = findStoreBorekByIdThrow(id);
+
 	    
-		ensureBorekNotAssignedToAnyStore(dtoStoreBorekIU.getBorekId());
+		ensureBorekNotAssignedToAnyStore(dtoStoreBorekIU.getBorekId(),id);
 
 		ensureAssignableForStoreBorek(dtoStoreBorekIU, id);
 
 		
-		StoreBorek storeBorek = findStoreBorekByIdThrow(id);
 
 		StoreBorek storeBorekInput = createStoreBorek(dtoStoreBorekIU);
 

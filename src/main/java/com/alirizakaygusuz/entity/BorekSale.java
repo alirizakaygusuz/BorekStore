@@ -26,5 +26,7 @@ public class BorekSale extends BaseEntity {
 
 	@ManyToOne
 	private Customer customer;
+	
+	
 
 }
