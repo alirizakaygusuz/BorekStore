@@ -10,4 +10,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 	boolean existsByAccountsIdAndIdNot(Long accountId, Long customerId);
 	
+	boolean existsById(Long id);
+	
 }

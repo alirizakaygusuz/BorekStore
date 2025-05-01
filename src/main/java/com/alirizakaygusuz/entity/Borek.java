@@ -40,6 +40,8 @@ public class Borek extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @NotNull
     private BorekStatus borekStatus;
+    
+    
 
 }
 

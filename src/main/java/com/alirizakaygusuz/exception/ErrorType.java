@@ -50,7 +50,12 @@ public enum ErrorType implements BaseEnum {
 
 	STOREBOREK_NOT_FOUND("8000", "StoreBorek is not found"),
 	STOREBOREK_ALREADY_EXISTS("8001", "StoreBorek already exists"),
-	STOREBOREK_BOREK_ALREADY_EXISTS("8002", "Borek already exists in another StoreBorek");
+	STOREBOREK_BOREK_ALREADY_EXISTS("8002", "Borek already exists in another StoreBorek"),
+	
+	BOREKSALE_NOT_FOUND("9000", "Borek Sale is not found"),
+	BOREKSALE__ALREADY_ASSIGNED("9001", "Borek Sale already assigned"),
+	BOREKSALE_BOREK_ALREADY_EXISTS("8001", "Borek already sold");
+
 
 	private final String code;
 	private final String message;

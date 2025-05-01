@@ -76,6 +76,7 @@ public class CustomerServiceImpl implements ICustomerService {
 		return customerMapper.customerToDtoCustomer(savedCustomer);
 	}
 
+	@Override
 	public Customer findCustomerByIdThrow(Long id) {
 		return customerRepository.findById(id)
 				.orElseThrow(() -> new BaseException(new ErrorMessage(ErrorType.CUSTOMER_NOT_FOUND, "id:" + id)));
