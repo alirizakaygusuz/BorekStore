@@ -3,12 +3,11 @@ package com.alirizakaygusuz.service.impl;
 import java.util.Date;
 import java.util.UUID;
 
-import org.springframework.security.core.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +54,6 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
 	private User createUser(AuthRequest authRequest) {
 		User user = new User();
-		user.setCreateTime(new Date());
 		user.setUsername(authRequest.getUsername());
 		user.setPassword(bCryptPasswordEncoder.encode(authRequest.getPassword()));
 
@@ -78,7 +76,6 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 	private RefreshToken createRefreshToken(User user) {
 
 		RefreshToken refreshToken = new RefreshToken();
-		refreshToken.setCreateTime(new Date());
 		refreshToken.setExpiredDate(new Date(System.currentTimeMillis() + refreshTokenExpirationMs));
 		refreshToken.setRefreshToken(UUID.randomUUID().toString());
 		refreshToken.setUser(user);

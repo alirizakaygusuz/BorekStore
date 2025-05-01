@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ public class BorekServiceImpl implements IBorekService{
 	
 	private Borek createBorek(DtoBorekIU dtoBorekIU) {
 		Borek borek = borekMapper.dtoBorekIUToBorek(dtoBorekIU);
-		borek.setCreateTime(new Date());
 		borek.setBorekStatus(BorekStatus.SALABLE);
 		borek.setCurrencyType(CurrencyType.AUD);
 		

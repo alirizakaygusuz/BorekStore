@@ -18,15 +18,11 @@ public interface AddressMapper {
     DtoAddress addressToDtoAddress(Address address);
 
     
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createTime", ignore = true)
     Address dtoAddressIUToAddress(DtoAddressIU dtoAddressIU);
 
     DtoAddressIU dtoAddressToDtoAddressIU(DtoAddress dtoAddress);
     
     @BeanMapping(ignoreByDefault = false)
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createTime", ignore = true)
     void updateAddressFromDtoAddressIU(DtoAddressIU dtoAddressIU, @MappingTarget Address address);
     
     

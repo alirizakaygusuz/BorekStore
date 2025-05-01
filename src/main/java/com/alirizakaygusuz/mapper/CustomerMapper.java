@@ -20,14 +20,14 @@ public interface CustomerMapper {
 
 	DtoCustomer customerToDtoCustomer(Customer customer);
 
-	@BeanMapping(ignoreByDefault = true)
+    @BeanMapping(ignoreByDefault = false)
 	@Mapping(target = "customerName", source = "customerName")
 	Customer dtoCustomerIUToCustomer(DtoCustomerIU dtoCustomerIU);
 
 	@Mapping(target = "accountIds", source = "accounts", qualifiedByName = "mapAccountsToAccountIds")
 	DtoCustomerIU dtoCustomerToDtoCustomerIU(DtoCustomer dtoCustomer);
 
-	@BeanMapping(ignoreByDefault = true)
+    @BeanMapping(ignoreByDefault = false)
 	@Mapping(target = "customerName", source = "customerName")
 	void updateCustomerFromDtoCustomerIU(DtoCustomerIU dtoCustomerIU,@MappingTarget Customer customer);
 

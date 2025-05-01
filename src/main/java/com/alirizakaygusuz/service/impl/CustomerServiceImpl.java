@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,6 @@ public class CustomerServiceImpl implements ICustomerService {
 	private Customer createCustomer(DtoCustomerIU dtoCustomerIU) {
 
 		Customer customer = customerMapper.dtoCustomerIUToCustomer(dtoCustomerIU);
-		customer.setCreateTime(new Date());
 
 		Set<Account> accounts = fetchAccountsByIds(dtoCustomerIU.getAccountIds());
 

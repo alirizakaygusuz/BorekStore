@@ -3,7 +3,6 @@ package com.alirizakaygusuz.service.impl;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,6 @@ public class AccountServiceImpl implements IAccountService {
 			throw new BaseException(new ErrorMessage(ErrorType.INVALID_BIRTH_DATE));
 		}
 		Account account = accountMapper.dtoAccountIUToAccount(dtoAccountIU);
-		account.setCreateTime(new Date());
 
 		return account;
 

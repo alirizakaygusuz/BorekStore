@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +90,6 @@ public class StoreBorekServiceImpl implements IStoreBorekService {
 		
 		
 		StoreBorek savedStoreBorek = storeBorekRepository.save(createStoreBorek(dtoStoreBorekIU));
-		savedStoreBorek.setCreateTime(new Date());
 
 		return storeBorekMapper.storeBorekToDtoStoreBorek(savedStoreBorek);
 	}

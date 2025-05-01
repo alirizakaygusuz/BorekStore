@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ public class AddressServiceImpl implements IAddressService {
 
 	private Address createAddress(DtoAddressIU dtoAddressIU) {
 		Address currentAddress = addressMapper.dtoAddressIUToAddress(dtoAddressIU);
-		currentAddress.setCreateTime(new Date());
 
 		return currentAddress;
 	}

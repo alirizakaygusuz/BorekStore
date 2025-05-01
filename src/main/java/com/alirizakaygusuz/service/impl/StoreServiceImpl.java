@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,6 @@ public class StoreServiceImpl implements IStoreService {
 
 	private Store createStore(DtoStoreIU dtoStoreIU) {
 		Store store = storeMapper.dtoStoreIUToStore(dtoStoreIU);
-		store.setCreateTime(new Date());
 
 		assignRelatedEntities(dtoStoreIU, store);
 

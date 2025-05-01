@@ -15,11 +15,11 @@ public interface StoreMapper {
 	DtoStore storeToDtoStore(Store store);
 
 	
-	@BeanMapping(ignoreByDefault = true)
+    @BeanMapping(ignoreByDefault = false)
 	@Mapping(target = "name", source = "name")
 	Store dtoStoreIUToStore(DtoStoreIU dtoStoreIU);
 
-	@BeanMapping(ignoreByDefault = true)
+    @BeanMapping(ignoreByDefault = false)
 	@Mapping(target = "name", source = "name")
 	void update(DtoStoreIU dtoStoreIU, @MappingTarget Store store);
 

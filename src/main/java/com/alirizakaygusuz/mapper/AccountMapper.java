@@ -21,9 +21,7 @@ public interface AccountMapper {
 	@Mapping(target = "address_id",source = "address")
 	DtoAccountIU dtoAccountToAccountIU(DtoAccount dtoAccount);
 
-	@BeanMapping(ignoreByDefault = false)
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "createTime", ignore = true)
+    @BeanMapping(ignoreByDefault = false)
     @Mapping(target = "address", expression = "java(dtoAccountIU.getAddress_id() != null ? addressMapper.fromId(dtoAccountIU.getAddress_id()) : null)")
 	void updateAccountFromDtoAccountIU(DtoAccountIU dtoAccountIU, @MappingTarget Account account,@Context AddressMapper addressMapper);
 	

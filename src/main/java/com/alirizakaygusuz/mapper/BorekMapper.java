@@ -17,15 +17,12 @@ public interface BorekMapper {
     DtoBorek borekToDtoBorek(Borek borek);
 
     
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createTime", ignore = true)
+    @BeanMapping(ignoreByDefault = false)
     Borek dtoBorekIUToBorek(DtoBorekIU dtoBorekIU);
 
     DtoBorekIU dtoBorekToDtoBorekIU(DtoBorek dtoBorek);
     
     @BeanMapping(ignoreByDefault = false)
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createTime", ignore = true)
     void updateBorekFromDtoBorekIU(DtoBorekIU dtoBorekIU, @MappingTarget Borek borek);
 
 	
