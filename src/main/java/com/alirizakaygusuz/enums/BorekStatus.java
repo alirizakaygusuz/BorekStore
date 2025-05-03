@@ -3,7 +3,8 @@ package com.alirizakaygusuz.enums;
 public enum BorekStatus implements BaseEnum{
    
 	SALABLE("SALABLE"),
-    SOLD("SOLD");
+	SOLD("SOLD"),
+    OUT_OF_STOCK("OUT OF STOCK");
     
     
 

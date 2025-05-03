@@ -21,5 +21,9 @@ public interface IBorekService {
 	public void deleteBorek(Long id);
 	
 	public Borek findBorekByIdThrow(Long id);
+	
+	
+
+	public Borek changeBorekStatus(Borek borek);
 
 }

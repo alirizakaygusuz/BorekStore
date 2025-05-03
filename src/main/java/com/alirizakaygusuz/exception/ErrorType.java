@@ -35,6 +35,10 @@ public enum ErrorType implements BaseEnum {
 
 	// Borek Errors
 	BOREK_NOT_FOUND("4000", "Borek is not found"),
+	BOREK_ALREADY_SOLD("4001", "Borek is already sold"),
+	BOREK_OUT_OF_STOCK("4002", "Borek is out of stock"),
+	BOREK_NOT_IN_STORE("4002", "Borek is not store"),
+
 
 	// Account Errors
 	ACCOUNT_NOT_FOUND("5000", "Account is not found"), 
@@ -54,7 +58,11 @@ public enum ErrorType implements BaseEnum {
 	
 	BOREKSALE_NOT_FOUND("9000", "Borek Sale is not found"),
 	BOREKSALE__ALREADY_ASSIGNED("9001", "Borek Sale already assigned"),
-	BOREKSALE_BOREK_ALREADY_EXISTS("8001", "Borek already sold");
+	BOREKSALE_BOREK_ALREADY_EXISTS("9001", "Borek already sold"),
+	
+	
+	INSUFFICIENT_FUNDS("10001", "Your card has insufficient funds"),
+    INVALID_PAYMENT_METHOD("10002", "The payment method is invalid");
 
 
 	private final String code;

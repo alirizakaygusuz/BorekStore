@@ -19,4 +19,7 @@ public interface IAccountService {
 	
 	public Account findAccountByIdThrow(Long id);
 	
+	
+	public Account updateAccountAmount(Account account);
+
 }

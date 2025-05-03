@@ -2,8 +2,8 @@ package com.alirizakaygusuz.service;
 
 import java.util.List;
 
+import com.alirizakaygusuz.dto.DtoBorekSale;
 import com.alirizakaygusuz.dto.DtoBorekSaleIU;
-import com.alirizakaygusuz.entity.DtoBorekSale;
 
 public interface IBorekSaleService {
 	

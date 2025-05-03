@@ -2,6 +2,7 @@ package com.alirizakaygusuz.dto;
 
 import java.math.BigDecimal;
 
+import com.alirizakaygusuz.enums.BorekStatus;
 import com.alirizakaygusuz.enums.BorekType;
 
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +24,12 @@ public class DtoBorekIU {
 	@NotNull
 	@Positive
 	private BigDecimal price;
+	
+	@NotNull
+    private BorekStatus borekStatus;
 
+
+	
 	
 
 }

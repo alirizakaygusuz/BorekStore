@@ -3,8 +3,8 @@ package com.alirizakaygusuz.controller;
 import java.util.List;
 
 import com.alirizakaygusuz.controller.response.RootEntity;
+import com.alirizakaygusuz.dto.DtoBorekSale;
 import com.alirizakaygusuz.dto.DtoBorekSaleIU;
-import com.alirizakaygusuz.entity.DtoBorekSale;
 
 public interface IBorekSaleController {
 

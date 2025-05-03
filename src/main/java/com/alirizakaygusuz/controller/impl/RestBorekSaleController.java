@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alirizakaygusuz.controller.IBorekSaleController;
 import com.alirizakaygusuz.controller.RestBaseController;
 import com.alirizakaygusuz.controller.response.RootEntity;
+import com.alirizakaygusuz.dto.DtoBorekSale;
 import com.alirizakaygusuz.dto.DtoBorekSaleIU;
-import com.alirizakaygusuz.entity.DtoBorekSale;
 import com.alirizakaygusuz.service.IBorekSaleService;
 
 import jakarta.validation.Valid;

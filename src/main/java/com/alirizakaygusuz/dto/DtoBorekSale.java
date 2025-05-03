@@ -1,9 +1,6 @@
-package com.alirizakaygusuz.entity;
+package com.alirizakaygusuz.dto;
 
-import com.alirizakaygusuz.dto.DtoBase;
-import com.alirizakaygusuz.dto.DtoBorek;
-import com.alirizakaygusuz.dto.DtoCustomer;
-import com.alirizakaygusuz.dto.DtoStore;
+import com.alirizakaygusuz.entity.Account;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +19,8 @@ public class DtoBorekSale extends DtoBase {
 
 	private DtoCustomer customer;
 	
-
+	
+	private Account account;
 
 
 }

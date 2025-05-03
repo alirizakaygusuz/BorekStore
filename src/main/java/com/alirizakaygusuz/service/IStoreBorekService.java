@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alirizakaygusuz.dto.DtoStoreBorek;
 import com.alirizakaygusuz.dto.DtoStoreBorekIU;
+import com.alirizakaygusuz.entity.Account;
 
 public interface IStoreBorekService {
 
@@ -16,5 +17,6 @@ public interface IStoreBorekService {
 	public DtoStoreBorek updateStoreBorek(DtoStoreBorekIU dtoStoreBorekIU, Long id);
 	
 	public void deleteStoreBorek(Long id);
+	
 
 }

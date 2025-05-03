@@ -91,4 +91,10 @@ public class BorekServiceImpl implements IBorekService{
 		
 	}
 
+	@Override
+	public Borek changeBorekStatus(Borek borek) {
+
+		return borekRepository.save(borek);
+	}
+
 }
