@@ -79,13 +79,16 @@ cd borekstore
 # 3. Build and run
 mvn clean install
 mvn spring-boot:run
-
+```
+---
 ✍️ Author
 Ali Rıza Kaygusuz
 👨‍💻 Backend Developer
-🌐 GitHub Profile
+🌐 GitHub Profile(https://github.com/alirizakaygusuz)
 
 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License.(https://opensource.org/licenses/MIT)
+
 Feel free to fork, contribute, or use it freely in your own applications.
+
 
