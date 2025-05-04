@@ -1,10 +1,10 @@
 package com.alirizakaygusuz.service;
 
-import com.alirizakaygusuz.entity.CurrencyRate;
+import com.alirizakaygusuz.dto.DtoCurrencyRate;
 
 public interface ICurrencyRateService {
 	
-	 public CurrencyRate getExchangeRates();
+	 public DtoCurrencyRate getExchangeRates();
 
 
 }

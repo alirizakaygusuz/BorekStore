@@ -18,7 +18,6 @@ public interface AccountMapper {
 	@Mapping(target = "address",source = "address_id")
 	Account dtoAccountIUToAccount(DtoAccountIU dtoAccountIU);
 	
-	@Mapping(target = "address_id",source = "address")
 	DtoAccountIU dtoAccountToAccountIU(DtoAccount dtoAccount);
 
     @BeanMapping(ignoreByDefault = false)

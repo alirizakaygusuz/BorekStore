@@ -5,47 +5,55 @@ import java.time.LocalDate;
 
 import com.alirizakaygusuz.enums.CurrencyType;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Input DTO for creating or updating an account. Used in POST/PUT requests.")
 public class DtoAccountIU {
-	
-	@NotNull
-	private Long address_id;
 
-	@NotBlank
-	private String firstName;
+    @Schema(description = "ID of the associated address", example = "1", required = true)
+    @NotNull(message = "Address ID cannot be null")
+    private Long address_id;
 
-	@NotBlank
-	private String lastName;
+    @Schema(description = "First name of the account holder", example = "Ali", required = true)
+    @NotBlank(message = "First name cannot be blank")
+    private String firstName;
 
-	@NotBlank
-	private String identityNumber;
+    @Schema(description = "Last name of the account holder", example = "Kaygusuz", required = true)
+    @NotBlank(message = "Last name cannot be blank")
+    private String lastName;
 
-	@NotNull
-	private LocalDate birthDate;
+    @Schema(description = "National identity number (11 digits)", example = "12345678901", required = true)
+    @NotBlank(message = "Identity number cannot be blank")
+    private String identityNumber;
 
-	@NotBlank
-	private String cardNo;
+    @Schema(description = "Date of birth (YYYY-MM-DD)", example = "1995-08-15", required = true)
+    @NotNull(message = "Birth date cannot be null")
+    private LocalDate birthDate;
 
-	@NotNull
-	private BigDecimal amount;
+    @Schema(description = "Credit card number (16 digits)", example = "1234567812345678", required = true)
+    @NotBlank(message = "Card number cannot be blank")
+    private String cardNo;
 
-	@NotNull
-	private CurrencyType currencyType;
+    @Schema(description = "Account balance", example = "10000.00", required = true)
+    @NotNull(message = "Amount cannot be null")
+    private BigDecimal amount;
 
-	@NotBlank
-	private String bankName;
+    @Schema(description = "Currency type", example = "TRY", required = true)
+    @NotNull(message = "Currency type cannot be null")
+    private CurrencyType currencyType;
 
-	@NotNull
-	private BigDecimal limitOfCard;
+    @Schema(description = "Bank name", example = "Ziraat Bankası", required = true)
+    @NotBlank(message = "Bank name cannot be blank")
+    private String bankName;
 
+    @Schema(description = "Card limit", example = "15000.00", required = true)
+    @NotNull(message = "Limit of card cannot be null")
+    private BigDecimal limitOfCard;
 }

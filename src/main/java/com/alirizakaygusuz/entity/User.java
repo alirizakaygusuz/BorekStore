@@ -34,4 +34,6 @@ public class User extends BaseEntity implements UserDetails {
 		return List.of();
 	}
 
+	
+
 }

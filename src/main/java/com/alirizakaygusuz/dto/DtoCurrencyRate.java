@@ -1,4 +1,4 @@
-package com.alirizakaygusuz.entity;
+package com.alirizakaygusuz.dto;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CurrencyRate {
+public class DtoCurrencyRate {
 
 	
 	@JsonProperty("result")

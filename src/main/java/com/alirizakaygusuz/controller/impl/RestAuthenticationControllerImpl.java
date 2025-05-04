@@ -14,6 +14,7 @@ import com.alirizakaygusuz.dto.DtoUser;
 import com.alirizakaygusuz.dto.RefreshTokenRequest;
 import com.alirizakaygusuz.service.IAuthenticationService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 
@@ -25,7 +26,10 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
 	
 	
 		
-	
+	@Operation(
+	        summary = "Register a new user",
+	        description = "Creates a new user account using username and password."
+	    )
 	@PostMapping("/register")
 	@Override
 	public RootEntity<DtoUser> register(@Valid @RequestBody AuthRequest authRequest) {
@@ -33,7 +37,10 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
 	}
 
 
-	
+	@Operation(
+		    summary = "Authenticate and obtain JWT token",
+		    description = "Send username and password to receive an access and refresh token."
+		)
 	@PostMapping("/authenticate")
 	@Override
 	public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest authRequest) {
@@ -41,7 +48,10 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
 		return ok(authenticationService.authenticate(authRequest));
 	}
 
-
+	@Operation(
+		    summary = "Refresh access token that is expired",
+		    description = "Send refresh token to receive a new access."
+		)
 	@PostMapping("/refresh-token")
 	@Override
 	public RootEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {

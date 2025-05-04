@@ -1,7 +1,6 @@
 package com.alirizakaygusuz.dto;
 
-import com.alirizakaygusuz.entity.Account;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +10,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Represents a Börek sale transaction between a customer and a store")
 public class DtoBorekSale extends DtoBase {
 
-	private DtoStore store;
+    @Schema(description = "Store that sold the börek")
+    private DtoStore store;
 
-	private DtoBorek borek;
+    @Schema(description = "Börek item that was sold")
+    private DtoBorek borek;
 
-	private DtoCustomer customer;
-	
-	
-	private Account account;
+    @Schema(description = "Customer who purchased the börek")
+    private DtoCustomer customer;
 
-
+    @Schema(description = "Account used in the transaction")
+    private DtoAccount account; 
 }
+

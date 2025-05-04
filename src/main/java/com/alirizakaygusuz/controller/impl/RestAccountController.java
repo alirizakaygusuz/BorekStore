@@ -19,6 +19,7 @@ import com.alirizakaygusuz.dto.DtoAccount;
 import com.alirizakaygusuz.dto.DtoAccountIU;
 import com.alirizakaygusuz.service.IAccountService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 
@@ -31,6 +32,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 	private IAccountService accountService;
 	
 	
+    @Operation(summary = "Create a new account")
 	@PostMapping("/save")
 	@Override
 	public RootEntity<DtoAccount> saveAccount(@Valid @RequestBody DtoAccountIU dtoAccountIU) {
@@ -39,6 +41,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 	}
 
 
+    @Operation(summary = "Get account by ID")
 	@GetMapping("/list/{id}")
 	@Override
 	public RootEntity<DtoAccount> findAccountById(@PathVariable Long id) {
@@ -46,7 +49,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 		return ok(accountService.findAccountById(id));
 	}
 
-
+    @Operation(summary = "Get all accounts")
 	@GetMapping("/list")
 	@Override
 	public RootEntity<List<DtoAccount>> getAccounts() {
@@ -55,6 +58,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 	}
 
 
+    @Operation(summary = "Update account by ID")
 	@PutMapping("/update/{id}")
 	@Override
 	public RootEntity<DtoAccount> updateAccount(@Valid @RequestBody DtoAccountIU dtoAccountIU,@PathVariable Long id) {
@@ -62,7 +66,7 @@ public class RestAccountController extends RestBaseController implements IRestAc
 		return ok(accountService.updateAccount(dtoAccountIU, id));
 	}
 
-
+    @Operation(summary = "Delete account by ID")
 	@DeleteMapping("/delete/{id}")
 	@Override
 	public RootEntity<String> deletAccount(@PathVariable Long id) {

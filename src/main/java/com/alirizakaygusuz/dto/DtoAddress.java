@@ -1,14 +1,31 @@
 package com.alirizakaygusuz.dto;
 
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Schema(description = "Address information associated with an account,customer and store")
 public class DtoAddress extends DtoBase {
 
-	public String country;
+    @Schema(description = "Country name", example = "Turkey")
+    private String country;
 
-	public String city;
+    @Schema(description = "City name", example = "Izmir")
+    private String city;
 
-	public String state;
+    @Schema(description = "State or province", example = "Aegean")
+    private String state;
 
-	public String street;
+    @Schema(description = "Street address", example = "Izmir Caddesi No:15")
+    private String street;
 
-	public String postalCode;
+    @Schema(description = "Postal code or ZIP code", example = "35000")
+    private String postalCode;
 }

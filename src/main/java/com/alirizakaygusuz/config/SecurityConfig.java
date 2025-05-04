@@ -22,7 +22,11 @@ public class SecurityConfig {
     public static final String REGISTER = "/register";
     public static final String AUTHENTICATE = "/authenticate";
     public static final String REFRESH_TOKEN = "/refresh-token";
-
+    public static final String[] SWAGGER_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+        };
 
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
@@ -45,9 +49,11 @@ public class SecurityConfig {
                                         REGISTER,
                                         AUTHENTICATE,
                                         REFRESH_TOKEN
+                                        
 
 
                                 ).permitAll()
+                                .requestMatchers(SWAGGER_LIST).permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

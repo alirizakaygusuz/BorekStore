@@ -19,49 +19,49 @@ import com.alirizakaygusuz.dto.DtoCustomer;
 import com.alirizakaygusuz.dto.DtoCustomerIU;
 import com.alirizakaygusuz.service.ICustomerService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
-@RequestMapping("/rest/api/customer")
 @RestController
+@RequestMapping("/rest/api/customer")
 public class RestCustomerController extends RestBaseController implements IRestCustomerController {
-	
-	@Autowired
-	private ICustomerService customerService;
 
-	@PostMapping("/save")
-	@Override
-	public RootEntity<DtoCustomer> saveCustomer(@Valid @RequestBody DtoCustomerIU dtoCustomerIU) {
-		
-		return ok(customerService.saveCustomer(dtoCustomerIU));
-	}
+    @Autowired
+    private ICustomerService customerService;
 
-	@GetMapping("/list/{id}")
-	@Override
-	public RootEntity<DtoCustomer> findCustomerById(@PathVariable Long id) {
+    @Operation(summary = "Create a new customer")
+    @PostMapping("/save")
+    @Override
+    public RootEntity<DtoCustomer> saveCustomer(@Valid @RequestBody DtoCustomerIU dtoCustomerIU) {
+        return ok(customerService.saveCustomer(dtoCustomerIU));
+    }
 
-		return ok(customerService.findCustomerById(id));
-	}
+    @Operation(summary = "Get customer by ID")
+    @GetMapping("/list/{id}")
+    @Override
+    public RootEntity<DtoCustomer> findCustomerById(@PathVariable Long id) {
+        return ok(customerService.findCustomerById(id));
+    }
 
-	@GetMapping("/list")
-	@Override
-	public RootEntity<List<DtoCustomer>> getAllCustomers() {
+    @Operation(summary = "Get all customers")
+    @GetMapping("/list")
+    @Override
+    public RootEntity<List<DtoCustomer>> getAllCustomers() {
+        return ok(customerService.getAllCustomers());
+    }
 
-		return ok(customerService.getAllCustomers());
-	}
+    @Operation(summary = "Update customer by ID")
+    @PutMapping("/update/{id}")
+    @Override
+    public RootEntity<DtoCustomer> updateCustomer(@Valid @RequestBody DtoCustomerIU dtoCustomerIU, @PathVariable Long id) {
+        return ok(customerService.updateCustomer(dtoCustomerIU, id));
+    }
 
-	@PutMapping("/update/{id}")
-	@Override
-	public RootEntity<DtoCustomer> updateCustomer(@Valid @RequestBody DtoCustomerIU dtoCustomerIU,@PathVariable Long id) {
-
-		return ok(customerService.updateCustomer(dtoCustomerIU, id));
-	}
-
-	@DeleteMapping("/delete/{id}")
-	@Override
-	public RootEntity<String> deleteCustomer(@PathVariable Long id) {
-
-		customerService.deleteCustomer(id);
-		return ok("Customer has been successfully deleted.");
-	}
-
+    @Operation(summary = "Delete customer by ID")
+    @DeleteMapping("/delete/{id}")
+    @Override
+    public RootEntity<String> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return ok("Customer has been successfully deleted.");
+    }
 }

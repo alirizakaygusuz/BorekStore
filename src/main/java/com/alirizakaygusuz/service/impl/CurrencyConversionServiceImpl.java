@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alirizakaygusuz.entity.CurrencyRate;
+import com.alirizakaygusuz.dto.DtoCurrencyRate;
 import com.alirizakaygusuz.service.ICurrencyConversionService;
 import com.alirizakaygusuz.service.ICurrencyRateService;
 
@@ -17,7 +17,7 @@ public class CurrencyConversionServiceImpl implements ICurrencyConversionService
 	
 	@Override
 	public BigDecimal convertToAud(String currencyType, double priceInAUD) {
-		CurrencyRate currencyRate = currencyRateService.getExchangeRates();
+		DtoCurrencyRate currencyRate = currencyRateService.getExchangeRates();
         double usdToCurrencyTypeRate = currencyRate.getConversionRates().get(currencyType);
         
         

@@ -1,16 +1,7 @@
 package com.alirizakaygusuz.controller.impl;
-
-import java.util.List;
-
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.alirizakaygusuz.controller.IRestStoreBorekController;
 import com.alirizakaygusuz.controller.RestBaseController;
@@ -20,51 +11,48 @@ import com.alirizakaygusuz.dto.DtoStoreBorekIU;
 import com.alirizakaygusuz.service.IStoreBorekService;
 
 import jakarta.validation.Valid;
+import java.util.List;
 
-@RequestMapping("/rest/api/storeborek")
 @RestController
-public class RestStoreBorekController extends RestBaseController implements IRestStoreBorekController{
+@RequestMapping("/rest/api/storeborek")
+public class RestStoreBorekController extends RestBaseController implements IRestStoreBorekController {
 
-	@Autowired
-	private IStoreBorekService storeBorekService;
+    @Autowired
+    private IStoreBorekService storeBorekService;
 
-	@PostMapping("/save")
-	@Override
-	public RootEntity<DtoStoreBorek> saveStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU) {
-	
-		return ok(storeBorekService.saveStoreBorek(dtoStoreBorekIU));
-	}
+    @Operation(summary = "Assign a börek to a store")
+    @PostMapping("/save")
+    @Override
+    public RootEntity<DtoStoreBorek> saveStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU) {
+        return ok(storeBorekService.saveStoreBorek(dtoStoreBorekIU));
+    }
 
-	@GetMapping("/list/{id}")
-	@Override
-	public RootEntity<DtoStoreBorek> findStoreBorekById(@PathVariable Long id) {
-		
-		return ok(storeBorekService.findStoreBorekById(id));
-	}
+    @Operation(summary = "Get store-börek relation by ID")
+    @GetMapping("/list/{id}")
+    @Override
+    public RootEntity<DtoStoreBorek> findStoreBorekById(@PathVariable Long id) {
+        return ok(storeBorekService.findStoreBorekById(id));
+    }
 
-	@GetMapping("/list")
-	@Override
-	public RootEntity<List<DtoStoreBorek>> getAllStoreBoreks() {
-		
-		return ok(storeBorekService.getAllStoreBoreks());
-	}
+    @Operation(summary = "Get all store-börek relations")
+    @GetMapping("/list")
+    @Override
+    public RootEntity<List<DtoStoreBorek>> getAllStoreBoreks() {
+        return ok(storeBorekService.getAllStoreBoreks());
+    }
 
-	@PutMapping("/update/{id}")
-	@Override
-	public RootEntity<DtoStoreBorek> updateStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU,@PathVariable Long id) {
-		
-		return ok(storeBorekService.updateStoreBorek(dtoStoreBorekIU, id));
-	}
+    @Operation(summary = "Update store-börek relation by ID")
+    @PutMapping("/update/{id}")
+    @Override
+    public RootEntity<DtoStoreBorek> updateStoreBorek(@Valid @RequestBody DtoStoreBorekIU dtoStoreBorekIU, @PathVariable Long id) {
+        return ok(storeBorekService.updateStoreBorek(dtoStoreBorekIU, id));
+    }
 
-	@DeleteMapping("/delete/{id}")
-	@Override
-	public RootEntity<String> deleteStoreBorek(@PathVariable Long id) {
-		storeBorekService.deleteStoreBorek(id);
-		
-		return ok("StoreBorek has been deleted.");
-		
-		
-	}
-	
-	
+    @Operation(summary = "Delete store-börek relation by ID")
+    @DeleteMapping("/delete/{id}")
+    @Override
+    public RootEntity<String> deleteStoreBorek(@PathVariable Long id) {
+        storeBorekService.deleteStoreBorek(id);
+        return ok("StoreBorek has been deleted.");
+    }
 }

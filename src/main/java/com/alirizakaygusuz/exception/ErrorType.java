@@ -37,7 +37,7 @@ public enum ErrorType implements BaseEnum {
 	BOREK_NOT_FOUND("4000", "Borek is not found"),
 	BOREK_ALREADY_SOLD("4001", "Borek is already sold"),
 	BOREK_OUT_OF_STOCK("4002", "Borek is out of stock"),
-	BOREK_NOT_IN_STORE("4002", "Borek is not store"),
+	BOREK_NOT_IN_STORE("4003", "Borek is not store"),
 
 
 	// Account Errors

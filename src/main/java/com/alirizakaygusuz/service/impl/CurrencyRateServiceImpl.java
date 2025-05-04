@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.alirizakaygusuz.entity.CurrencyRate;
+import com.alirizakaygusuz.dto.DtoCurrencyRate;
 import com.alirizakaygusuz.service.ICurrencyRateService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,10 +23,10 @@ public class CurrencyRateServiceImpl implements ICurrencyRateService {
 	
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/{apiKey}/latest/AUD";
 	
-    public CurrencyRate getExchangeRates() {
+    public DtoCurrencyRate getExchangeRates() {
         String url = API_URL.replace("{apiKey}", apiKey);
 
-        return restTemplate.getForObject(url, CurrencyRate.class);
+        return restTemplate.getForObject(url, DtoCurrencyRate.class);
     }
     
     
