@@ -41,12 +41,34 @@ public class AccountServiceImpl implements IAccountService {
 		int age = Period.between(birthDate, today).getYears();
 		return age >= 12 && age <= 120;
 	}
+	
+	private void isValidIdentityNumber(String identityNumber) {
+		if (identityNumber == null || identityNumber.length() != 11 || !identityNumber.chars().allMatch(Character::isDigit)) {
+	        throw new BaseException(new ErrorMessage(
+	            ErrorType.INVALID_INPUT, 
+	            "Identity number must be exactly 11 digits"
+	        ));
+	    }
+	}
+	
+	private void isValidCardNumber(String cardNumber) {
+		 if (cardNumber == null || cardNumber.length() != 16 || !cardNumber.chars().allMatch(Character::isDigit)) {
+		        throw new BaseException(new ErrorMessage(
+		            ErrorType.INVALID_INPUT,
+		            "Card number must be exactly 16 digits"
+		        ));
+		    }
+
+	}
 
 	private Account createAccount(DtoAccountIU dtoAccountIU) {
 
 		if (!isValidBirthDate(dtoAccountIU.getBirthDate())) {
 			throw new BaseException(new ErrorMessage(ErrorType.INVALID_BIRTH_DATE));
 		}
+		
+		isValidIdentityNumber(dtoAccountIU.getIdentityNumber());
+		isValidCardNumber(dtoAccountIU.getCardNo());
 		Account account = accountMapper.dtoAccountIUToAccount(dtoAccountIU);
 
 		return account;
