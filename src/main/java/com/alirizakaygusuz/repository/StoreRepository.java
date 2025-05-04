@@ -9,6 +9,7 @@ import com.alirizakaygusuz.entity.Store;
 public interface StoreRepository extends JpaRepository<Store, Long> {
     boolean existsByAccountId(Long accountId);
     boolean existsByAccountIdAndIdNot(Long accountId, Long id);
+    
 
 
 }

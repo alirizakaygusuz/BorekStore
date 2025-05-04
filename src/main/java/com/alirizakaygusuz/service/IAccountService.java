@@ -22,4 +22,5 @@ public interface IAccountService {
 	
 	public Account updateAccountAmount(Account account);
 
+	
 }

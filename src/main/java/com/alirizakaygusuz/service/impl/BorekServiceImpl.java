@@ -28,6 +28,9 @@ public class BorekServiceImpl implements IBorekService{
 	@Autowired
 	private BorekMapper borekMapper;
 	
+	
+
+	
 	private Borek createBorek(DtoBorekIU dtoBorekIU) {
 		Borek borek = borekMapper.dtoBorekIUToBorek(dtoBorekIU);
 		borek.setBorekStatus(BorekStatus.SALABLE);
@@ -86,6 +89,10 @@ public class BorekServiceImpl implements IBorekService{
 	@Override
 	public void deleteBorek(Long id) {
 		Borek borek = findBorekByIdThrow(id);
+		
+		if(borek.getBorekStatus() != BorekStatus.SALABLE) {
+			throw new BaseException(new ErrorMessage(ErrorType.BOREK_CANNOT_BE_DELETED));
+		}
 		
 		borekRepository.delete(borek);
 		

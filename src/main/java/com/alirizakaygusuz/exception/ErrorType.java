@@ -32,12 +32,14 @@ public enum ErrorType implements BaseEnum {
 
 	// AddressErrors
 	ADDRESS_NOT_FOUND("3000", "Address is not found"),
+	ADDRESS_IS_USED_BY_ACCOUNT("3001","The address is still in use by an account and cannot be deleted or updated."),
 
 	// Borek Errors
 	BOREK_NOT_FOUND("4000", "Borek is not found"),
 	BOREK_ALREADY_SOLD("4001", "Borek is already sold"),
 	BOREK_OUT_OF_STOCK("4002", "Borek is out of stock"),
 	BOREK_NOT_IN_STORE("4003", "Borek is not store"),
+	BOREK_CANNOT_BE_DELETED("4004", "This borek cannot be deleted because it has already been transferred to a store or purchased by a customer."),
 
 
 	// Account Errors
@@ -46,11 +48,14 @@ public enum ErrorType implements BaseEnum {
 	ACCOUNT_ALREADY_ASSIGNED("5002", "Account is already assigned"),
 	ACCOUNT_IDENTITYNUMBER_ALREADY_EXISTS("5003", "Identity number already exists in another account"),
 	ACCOUNT_CARDNO_ALREADY_EXISTS("5004", "Card number already exists in another account"),
-
+	ACCOUNT_IS_USED_BY_CUSTOMER_OR_STORE("5005", "This account is currently used by a customer or store and cannot be deleted."),
 	// Customer Errors
 	CUSTOMER_NOT_FOUND("6000", "Customer is not found"),
+	CUSTOMER_ALREADY_BOUGHT_BOREK("6001", "Customer has purchased a börek and cannot be deleted."),
 
 	STORE_NOT_FOUND("7000", "Store is not found"),
+	STORE_CANNOT_BE_DELETED("7002", "Store cannot be deleted because it has already sold one or more böreks."),
+
 
 	STOREBOREK_NOT_FOUND("8000", "StoreBorek is not found"),
 	STOREBOREK_ALREADY_EXISTS("8001", "StoreBorek already exists"),

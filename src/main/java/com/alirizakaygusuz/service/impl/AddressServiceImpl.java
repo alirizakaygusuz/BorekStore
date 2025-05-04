@@ -13,7 +13,9 @@ import com.alirizakaygusuz.exception.BaseException;
 import com.alirizakaygusuz.exception.ErrorMessage;
 import com.alirizakaygusuz.exception.ErrorType;
 import com.alirizakaygusuz.mapper.AddressMapper;
+import com.alirizakaygusuz.repository.AccountRepository;
 import com.alirizakaygusuz.repository.AddressRepository;
+import com.alirizakaygusuz.service.IAccountService;
 import com.alirizakaygusuz.service.IAddressService;
 
 @Service
@@ -25,12 +27,15 @@ public class AddressServiceImpl implements IAddressService {
 	@Autowired
 	private AddressMapper addressMapper;
 
+	@Autowired
+	private AccountRepository accountRepository;
+
 	private Address createAddress(DtoAddressIU dtoAddressIU) {
 		Address currentAddress = addressMapper.dtoAddressIUToAddress(dtoAddressIU);
 
 		return currentAddress;
 	}
-	
+
 	@Override
 	public Address findAddressByIdThrow(Long id) {
 		return addressRepository.findById(id).orElseThrow(() -> new BaseException(
@@ -44,39 +49,35 @@ public class AddressServiceImpl implements IAddressService {
 		return addressMapper.addressToDtoAddress(savedAddress);
 
 	}
-	
-	
 
 	@Override
 	public DtoAddress findAddressById(Long id) {
 		Address address = findAddressByIdThrow(id);
-		
-		
+
 		return addressMapper.addressToDtoAddress(address);
 	}
 
-	@Override 
+	@Override
 	public List<DtoAddress> getAllAddresses() {
-		List<DtoAddress> dtoAdressList =  new ArrayList<>();
+		List<DtoAddress> dtoAdressList = new ArrayList<>();
 		List<Address> addresList = addressRepository.findAll();
-		
-	
-		
-		for(Address address:addresList) {
+
+		for (Address address : addresList) {
 			dtoAdressList.add(addressMapper.addressToDtoAddress(address));
 		}
-		
-		
-		
+
 		return dtoAdressList;
 	}
 
 	@Override
 	public void deleteAddress(Long id) {
-		 Address address = findAddressByIdThrow(id);
+		Address address = findAddressByIdThrow(id);
 
-			    addressRepository.delete(address);
-		
+		if (accountRepository.existsByAddressId(id)) {
+			throw new BaseException(new ErrorMessage(ErrorType.ADDRESS_IS_USED_BY_ACCOUNT));
+		}
+		addressRepository.delete(address);
+
 	}
 
 	@Override
@@ -84,13 +85,11 @@ public class AddressServiceImpl implements IAddressService {
 		Address address = findAddressByIdThrow(id);
 
 		addressMapper.updateAddressFromDtoAddressIU(dtoAddressIU, address);
-		
+
 		Address updatedAddress = addressRepository.save(address);
-		
-		
+
 		return addressMapper.addressToDtoAddress(updatedAddress);
-		
-		
+
 	}
 
 }

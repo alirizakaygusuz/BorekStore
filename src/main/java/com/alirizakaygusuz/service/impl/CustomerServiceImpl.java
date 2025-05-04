@@ -17,6 +17,7 @@ import com.alirizakaygusuz.exception.BaseException;
 import com.alirizakaygusuz.exception.ErrorMessage;
 import com.alirizakaygusuz.exception.ErrorType;
 import com.alirizakaygusuz.mapper.CustomerMapper;
+import com.alirizakaygusuz.repository.BorekSaleRepository;
 import com.alirizakaygusuz.repository.CustomerRepository;
 import com.alirizakaygusuz.service.IAccountService;
 import com.alirizakaygusuz.service.ICustomerService;
@@ -37,6 +38,10 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Autowired
 	private IAccountService accountService;
+	
+	
+	@Autowired
+	private BorekSaleRepository borekSaleRepository;
 
 	private Customer createCustomer(DtoCustomerIU dtoCustomerIU) {
 
@@ -123,8 +128,12 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Transactional
 	@Override
 	public void deleteCustomer(Long id) {
-
 		Customer customer = findCustomerByIdThrow(id);
+		
+		if(borekSaleRepository.existsByCustomerId(id)) {
+			throw new BaseException(new ErrorMessage(ErrorType.CUSTOMER_ALREADY_BOUGHT_BOREK));
+		}
+		
 		customerRepository.delete(customer);
 
 	}

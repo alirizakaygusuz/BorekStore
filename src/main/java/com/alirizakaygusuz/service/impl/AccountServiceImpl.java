@@ -18,6 +18,8 @@ import com.alirizakaygusuz.exception.ErrorType;
 import com.alirizakaygusuz.mapper.AccountMapper;
 import com.alirizakaygusuz.mapper.AddressMapper;
 import com.alirizakaygusuz.repository.AccountRepository;
+import com.alirizakaygusuz.repository.CustomerRepository;
+import com.alirizakaygusuz.repository.StoreRepository;
 import com.alirizakaygusuz.service.IAccountService;
 import com.alirizakaygusuz.service.IAddressService;
 
@@ -35,6 +37,12 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
 	private AddressMapper addressMapper;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private StoreRepository storeRepository;
 
 	private boolean isValidBirthDate(LocalDate birthDate) {
 		LocalDate today = LocalDate.now();
@@ -149,6 +157,9 @@ public class AccountServiceImpl implements IAccountService {
 
 		accountMapper.updateAccountFromDtoAccountIU(dtoAccountIU, account, addressMapper);
 
+		if(accountRepository.existsByAddressIdAndIdNot(dtoAccountIU.getAddress_id(), id)) {
+			 throw new BaseException(new ErrorMessage(ErrorType.ADDRESS_IS_USED_BY_ACCOUNT));
+		}
 		Address address = addressService.findAddressByIdThrow(dtoAccountIU.getAddress_id());
 
 		account.setAddress(address);
@@ -161,6 +172,12 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public void deleteAccount(Long id) {
 		Account account = findAccountByIdThrow(id);
+		
+		if(customerRepository.existsByAccountsId(id) || storeRepository.existsByAccountId(id)) {
+			 throw new BaseException(new ErrorMessage(ErrorType.ACCOUNT_IS_USED_BY_CUSTOMER_OR_STORE));
+
+		}
+		
 		accountRepository.delete(account);
 
 	}
@@ -170,5 +187,7 @@ public class AccountServiceImpl implements IAccountService {
 	
 		return accountRepository.save(account);
 	}
+
+	
 
 }

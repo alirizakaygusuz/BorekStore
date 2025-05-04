@@ -15,6 +15,7 @@ import com.alirizakaygusuz.exception.BaseException;
 import com.alirizakaygusuz.exception.ErrorMessage;
 import com.alirizakaygusuz.exception.ErrorType;
 import com.alirizakaygusuz.mapper.StoreMapper;
+import com.alirizakaygusuz.repository.StoreBorekRepository;
 import com.alirizakaygusuz.repository.StoreRepository;
 import com.alirizakaygusuz.service.IAccountService;
 import com.alirizakaygusuz.service.IAddressService;
@@ -41,6 +42,9 @@ public class StoreServiceImpl implements IStoreService {
 
 	@Autowired
 	private IAccountService accountService;
+	
+	@Autowired
+	private StoreBorekRepository storeBorekRepository;
 
 	private void assignRelatedEntities(DtoStoreIU dtoStoreIU, Store store) {
 		Address address = addressService.findAddressByIdThrow(dtoStoreIU.getAddressId());
@@ -118,7 +122,10 @@ public class StoreServiceImpl implements IStoreService {
 	@Override
 	public void deleteStore(Long id) {
 		Store store = findStoreByIdThrow(id);
-
+		if(storeBorekRepository.existsByStoreId(id)) {
+			throw new BaseException(new ErrorMessage(ErrorType.STORE_CANNOT_BE_DELETED));
+		}
+		
 		storeRepository.delete(store);
 
 	}

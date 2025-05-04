@@ -17,4 +17,6 @@ public interface BorekSaleRepository extends JpaRepository<BorekSale, Long> {
 	
 	boolean existsByBorekIdAndIdNot(Long borekId,Long exculededId);
 	
+	boolean existsByCustomerId(Long customerId);
+	
 }

@@ -14,6 +14,7 @@ public interface StoreBorekRepository extends JpaRepository<StoreBorek, Long> {
 	
 	boolean existsByBorekIdAndIdNot(Long borekId,  Long excludedId);
 
-	
+	boolean existsByStoreId(Long storeId);
+
 
 }
