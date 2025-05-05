@@ -81,14 +81,14 @@ mvn clean install
 mvn spring-boot:run
 ```
 ---
-✍️ Author
-Ali Rıza Kaygusuz
-👨‍💻 Backend Developer
-🌐 GitHub Profile(https://github.com/alirizakaygusuz)
+-✍️ Author
+-Ali Rıza Kaygusuz
+-👨‍💻 Backend Developer
+-🌐 GitHub Profile(https://github.com/alirizakaygusuz)
 
 📄 License
-This project is licensed under the MIT License.(https://opensource.org/licenses/MIT)
+-This project is licensed under the MIT License.(https://opensource.org/licenses/MIT)
 
-Feel free to fork, contribute, or use it freely in your own applications.
+-Feel free to fork, contribute, or use it freely in your own applications.
 
 
