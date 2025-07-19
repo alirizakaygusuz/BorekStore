@@ -71,11 +71,6 @@ spring.log
 .env.local
 .env.production
 
-# Spring app configs with real data
-src/main/resources/application.properties
-src/main/resources/application.yml
-src/main/resources/application-*.yml
-src/main/resources/application-*.properties
 
 # Secrets / Key dosyaları
 **/secrets/

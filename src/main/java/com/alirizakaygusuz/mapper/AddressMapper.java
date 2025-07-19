@@ -2,7 +2,6 @@ package com.alirizakaygusuz.mapper;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import com.alirizakaygusuz.dto.DtoAddress;

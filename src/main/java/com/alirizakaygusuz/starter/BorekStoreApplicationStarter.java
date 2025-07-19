@@ -16,7 +16,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class BorekStoreApplicationStarter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BorekStoreApplicationStarter.class, args);
+		SpringApplication app = new SpringApplication(BorekStoreApplicationStarter.class);
+		app.addInitializers(new DotenvInitializer());
+		app.run(args);
 	}
 
 }

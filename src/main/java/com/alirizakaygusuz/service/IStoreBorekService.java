@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.alirizakaygusuz.dto.DtoStoreBorek;
 import com.alirizakaygusuz.dto.DtoStoreBorekIU;
-import com.alirizakaygusuz.entity.Account;
 
 public interface IStoreBorekService {
 
