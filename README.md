@@ -36,6 +36,11 @@
 
 > 🔐 **Note:** Use the format `Bearer {your_token}` in the `Authorization` header after login.
 
+## 📬 Postman Collection
+
+The project includes a ready-to-use Postman collection:  
+🌐 [FraudScope Public Postman Link](https://www.postman.com/lunar-module-operator-48760766/springbootprojects/collection/c86xpci/borekstore)
+---
 ---
 
 ## 🧪 Sample Endpoints
@@ -81,14 +86,17 @@ mvn clean install
 mvn spring-boot:run
 ```
 ---
--✍️ Author
--Ali Rıza Kaygusuz
--👨‍💻 Backend Developer
--🌐 GitHub Profile(https://github.com/alirizakaygusuz)
+## ✍️ Author
 
-📄 License
--This project is licensed under the MIT License.(https://opensource.org/licenses/MIT)
+**Ali Rıza Kaygusuz** – 🛠️ Java Backend Developer  
+🌐 [GitHub Profile](https://github.com/alirizakaygusuz)  
+💼 [LinkedIn Profile](https://www.linkedin.com/in/alirizakaygusuz)
 
--Feel free to fork, contribute, or use it freely in your own applications.
+---
 
+## 📄 License
 
+This project is licensed under the MIT License.  
+📃 [MIT License Link](https://opensource.org/licenses/MIT)
+
+> Feel free to fork, contribute, or use it freely in your own applications.
