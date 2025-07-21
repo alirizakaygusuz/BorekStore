@@ -21,7 +21,7 @@
 
 | Layer         | Technologies                          |
 |---------------|----------------------------------------|
-| Backend       | Java 17, Spring Boot 3.4.4             |
+| Backend       | Java 17, Spring Boot 3.2.5             |
 | API Docs      | Springdoc OpenAPI, Swagger UI          |
 | Persistence   | Spring Data JPA, Hibernate, PostgreSQL |
 | Security      | Spring Security, JWT, BCrypt           |
